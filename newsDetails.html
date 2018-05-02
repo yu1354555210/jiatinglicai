@@ -4,24 +4,27 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title v-text="ViewPointTitle"></title>
+		<title></title>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<script src="js/fontrem.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			[v-clock]{
+				display: none;
+			}
+		</style>
 	</head>
 
 	<body>
 		<div class="wrapper" id="app">
 			<div class="main">
-				<h1 class="top_title" v-text="ViewPointTitle"></h1>
-				<div class="top_other" v-text="Crtime"></div>
+				<h1 class="top_title" v-text="NewsTitle"></h1>
+				<div class="top_other" v-clock>{{GzUserName}} {{Crtime}}</div>
 				<div class="content">
-					<div class="video">
-						<video :src='ViewPointUrl' controls></video>
-					</div>
+					<p v-text="NewsTextContent"></p>
 				</div>
 				<div class="footer">
 					<div class="footer_state">(文章内容仅代表个人观点，不构成投资建议。)</div>
-					<img src="img/footer.jpg" />
+					<img src="img/footer.jpg"/>
 				</div>
 			</div>
 		</div>
@@ -34,39 +37,34 @@
 				if(r != null) return unescape(r[2]);
 				return null;
 			}
+			
 			var app = new Vue({
 				el: '#app',
 				data: {
-					ViewPointUrl: "",
-					ViewPointTitle: "",
-					ViewPointResume: "",
+					NewsTitle: "",
+					GzUserName: "",
 					Crtime: "",
+					NewsTextContent: "",
 				},
-				mounted: function() {
+				mounted: function(){
 					var self = this;
-					var id = getQueryString("id");
-					var videoId = getQueryString("programId");
-					this.$nextTick(function() {
+					var id = getQueryString("DateId");
+					this.$nextTick(function(){
 						$.ajax({
 							type: "GET",
-							url: "http://backlogin.tvlicai.com/guzhang/LcViewPointDetailDate/"+id+"/"+videoId+"?jsoncallback=?",
-//							http://backlogin.tvlicai.com/guzhang/LcViewPointDetailDate/235/1014
+							url: "http://backlogin.tvlicai.com/guzhang/LcNewsDetail/"+id+"?jsoncallback=?",
 							dataType: "jsonp",
 							success: function(data) {
-								console.log(data)
-								self.Crtime = data.CrTime;
-								self.ViewPointUrl = data.ViewPointUrl;
-								self.ViewPointTitle = data.ViewPointTitle;
-								self.ViewPointResume = data.ViewPointResume;
-								document.title = self.ViewPointTitle;
+								self.Crtime = data.Crtime;
+								self.GzUserName = data.GzUserName;
+								self.NewsTitle = data.NewsTitle;
+								self.NewsTextContent = data.NewsTextContent;
+								document.title = self.NewsTitle;
 							}
 						});
 					})
 				},
 				methods: {
-					tokdDetail: function(id) {
-						window.location.href = "details.html?"
-					}
 				}
 			});
 		</script>

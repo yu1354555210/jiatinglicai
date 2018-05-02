@@ -13,92 +13,15 @@
 		<div id="app" class="wrapper news_wrap">
 			<div class="news_list">
 				<ul>
-					<li>
+					<li v-for="item in newsList" @click="toNewsDetail(item.DateId)">
 						<dl>
 							<dt>
-								<a href="#"><img src="img/img.jpg"/></a>
+								<a href="javascript:;"><img :src="item.BgPic"/></a>
 							</dt>
 							<dd>
-								<a href="#">04月15日霖观大盘04月15日霖观大盘04月15日霖观大盘</a>
+								<a href="javascript:;" v-text="item.TitleName"></a>
 								<p>
-									<span>{{message}}</span>
-									<span>2月14日</span>
-									<span>13:44</span>
-								</p>
-							</dd>
-						</dl>
-					</li>
-					<li>
-						<dl>
-							<dt>
-								<a href="#"><img src="img/img.jpg"/></a>
-							</dt>
-							<dd>
-								<a href="#">04月15日霖观大盘</a>
-								<p>
-									<span>赵泓霖</span>
-									<span>2月14日</span>
-									<span>13:44</span>
-								</p>
-							</dd>
-						</dl>
-					</li>
-					<li>
-						<dl>
-							<dt>
-								<a href="#"><img src="img/img.jpg"/></a>
-							</dt>
-							<dd>
-								<a href="#">04月15日霖观大盘</a>
-								<p>
-									<span>赵泓霖</span>
-									<span>2月14日</span>
-									<span>13:44</span>
-								</p>
-							</dd>
-						</dl>
-					</li>
-					<li>
-						<dl>
-							<dt>
-								<a href="#"><img src="img/img.jpg"/></a>
-							</dt>
-							<dd>
-								<a href="#">04月15日霖观大盘</a>
-								<p>
-									<span>赵泓霖</span>
-									<span>2月14日</span>
-									<span>13:44</span>
-								</p>
-							</dd>
-						</dl>
-					</li>
-					<li>
-						<dl>
-							<dt>
-								<a href="#"><img src="img/img.jpg"/></a>
-							</dt>
-							<dd>
-								<a href="#">04月15日霖观大盘</a>
-								<p>
-									<span>赵泓霖</span>
-									<span>2月14日</span>
-									<span>13:44</span>
-								</p>
-							</dd>
-						</dl>
-					</li>
-					<li>
-						<dl>
-							<dt>
-								<a href="#"><img src="img/img.jpg"/></a>
-							</dt>
-							<dd>
-								<a href="#">04月15日霖观大盘</a>
-								<p>
-									<span>赵泓霖</span>
-									<span>2月14日</span>
-									<span>13:44</span>
+									<span v-text="item.DateTimeCr"></span>
 								</p>
 							</dd>
 						</dl>
@@ -112,19 +35,26 @@
 			var app = new Vue({
 				el: '#app',
 				data: {
-					message: 'Hello Vue!'
+					newsList: [],
 				},
 				mounted: function(){
+					var self = this;
 					this.$nextTick(function(){
 						$.ajax({
 							type: "GET",
-							url: "test.json",
-							dataType: "json",
+							url: "http://backlogin.tvlicai.com/guzhang/LcSharePageNewsH5/93/10/1?jsoncallback=?",
+							dataType: "jsonp",
 							success: function(data) {
 								console.log(data)
+								self.newsList = data;
 							}
 						});
 					})
+				},
+				methods: {
+					toNewsDetail:function(id){
+						window.location.href = "newsDetails.html?DateId="+id;
+					}
 				}
 			});
 		</script>
