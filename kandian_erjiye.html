@@ -9,10 +9,9 @@
 	</head>
 	<body>
 		<div class="wrapper" id="app">
-			<div class="video">
-				<!--<img src="img/img.jpg"/>-->
-				<!--<div class="play_btn"></div>-->
-				<video :src='ViewPointUrl' controls></video>
+			<div class="video" @click="play">
+				<div class="play_btn" v-if="isplayBtn"></div>
+				<video :poster="'http://backlogin.tvlicai.com/manage/program/VideoPic/'+VideoScreen" :src='ViewPointUrl' id="video"></video>
 			</div>
 			<div class="title" v-text="ViewPointTitle"></div>
 			<div class="recommend">
@@ -25,7 +24,7 @@
 					<li v-for="item in VideoRecList" @click="tokdDetail(item.Id,item.ProgramId)">
 						<dl>
 							<dt>
-								<a href="javascript:;"><img :src="item.VideoScreen"/></a>
+								<a href="javascript:;"><img :src="'http://backlogin.tvlicai.com/manage/program/VideoPic/'+item.VideoScreen"/></a>
 							</dt>
 							<dd><a href="javascript:;" v-text="item.VideoTitle"></a></dd>
 						</dl>
@@ -36,20 +35,30 @@
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
+			function getQueryString(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				var r = window.location.search.substr(1).match(reg);
+				if(r != null) return unescape(r[2]);
+				return null;
+			}
 			var app = new Vue({
 				el: '#app',
 				data: {
 					ViewPointUrl: "",
 					ViewPointTitle: "",
 					ViewPointResume: "",
-					VideoRecList: []
+					VideoScreen: "",
+					VideoRecList: [],
+					isplayBtn: true
 				},
 				mounted: function(){
 					var self = this;
+					var DateId = getQueryString("DateId");
+					var ProgramId = getQueryString("ProgramId");
 					this.$nextTick(function(){
 						$.ajax({
 							type: "GET",
-							url: "http://backlogin.tvlicai.com/guzhang/LcSharePageDetailDateH5/235/1014/10/1?jsoncallback=?",
+							url: "http://backlogin.tvlicai.com/guzhang/LcSharePageDetailDateH5/"+DateId+"/"+ProgramId+"/10/1?jsoncallback=?",
 							dataType: "jsonp",
 							success: function(data) {
 								console.log(data)
@@ -57,13 +66,20 @@
 								self.ViewPointTitle = data.ViewPointTitle;
 								self.ViewPointResume = data.ViewPointResume;
 								self.VideoRecList = data.VideoRec;
+								self.VideoScreen = data.VideoScreen;
 							}
 						});
 					})
 				},
 				methods: {
 					tokdDetail:function(id,ProgramId){
-						window.location.href = "details.html?id="+id+"&programId="+ProgramId+"";
+						window.location.href = "kandian_details.html?id="+id+"&programId="+ProgramId+"";
+					},
+					play: function(){
+						var video = document.getElementById("video");
+						video.play();
+						video.setAttribute("controls",true);
+						this.isplayBtn = false
 					}
 				}
 			});

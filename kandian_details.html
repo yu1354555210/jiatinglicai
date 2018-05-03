@@ -11,12 +11,18 @@
 
 	<body>
 		<div class="wrapper" id="app">
+			<div class="top_ad" v-if="isShowAd">
+				<a href="http://sj.qq.com/myapp/detail.htm?apkName=com.jtlctv.yyl"><img src="img/top_ad.jpg"/></a>
+				<div class="ad_close" @click="hideAd"></div>
+			</div>
+			<a href="http://sj.qq.com/myapp/detail.htm?apkName=com.jtlctv.yyl" class="fixed_ad">app内打开</a>
 			<div class="main">
 				<h1 class="top_title" v-text="ViewPointTitle"></h1>
 				<div class="top_other" v-text="Crtime"></div>
 				<div class="content">
-					<div class="video">
-						<video :src='ViewPointUrl' controls></video>
+					<div class="video" @click="play">
+						<div class="play_btn" v-if="isplayBtn"></div>
+						<video :poster="'http://backlogin.tvlicai.com/manage/program/VideoPic/'+VideoScreen" :src='ViewPointUrl' id="video"></video>
 					</div>
 				</div>
 				<div class="footer">
@@ -41,6 +47,9 @@
 					ViewPointTitle: "",
 					ViewPointResume: "",
 					Crtime: "",
+					VideoScreen: "",
+					isplayBtn: true,
+					isShowAd: true
 				},
 				mounted: function() {
 					var self = this;
@@ -50,7 +59,6 @@
 						$.ajax({
 							type: "GET",
 							url: "http://backlogin.tvlicai.com/guzhang/LcViewPointDetailDate/"+id+"/"+videoId+"?jsoncallback=?",
-//							http://backlogin.tvlicai.com/guzhang/LcViewPointDetailDate/235/1014
 							dataType: "jsonp",
 							success: function(data) {
 								console.log(data)
@@ -58,14 +66,21 @@
 								self.ViewPointUrl = data.ViewPointUrl;
 								self.ViewPointTitle = data.ViewPointTitle;
 								self.ViewPointResume = data.ViewPointResume;
+								self.VideoScreen = data.VideoScreen;
 								document.title = self.ViewPointTitle;
 							}
 						});
 					})
 				},
 				methods: {
-					tokdDetail: function(id) {
-						window.location.href = "details.html?"
+					play: function(){
+						var video = document.getElementById("video");
+						video.play();
+						video.setAttribute("controls",true);
+						this.isplayBtn = false
+					},
+					hideAd: function(){
+						this.isShowAd = false
 					}
 				}
 			});

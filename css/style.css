@@ -277,6 +277,7 @@ body {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   flex: 1;
+  line-height: 0.45rem;
 }
 .news_list ul li dl dd a {
   display: inline-block;
@@ -308,6 +309,9 @@ body {
   color: #9d9d9d;
   text-align: center;
   margin: 0.45rem 0 0.9rem;
+}
+.footer {
+  padding-bottom: 0.5rem;
 }
 .news_wrap {
   padding-top: 0;
@@ -367,5 +371,47 @@ body {
 }
 .news_wrap .news_list ul li dl dd a {
   line-height: 0.42rem;
+}
+.top_ad {
+  width: 100%;
+  height: 1.06rem;
+  margin-bottom: 0.1rem;
+  position: relative;
+  overflow: hidden;
+}
+.top_ad a {
+  display: block;
+}
+.top_ad .ad_close {
+  width: 0.2rem;
+  height: 0.2rem;
+  position: absolute;
+  right: 0.15rem;
+  top: 0.08rem;
+}
+.fixed_ad {
+  width: 1.68rem;
+  height: 0.6rem;
+  position: fixed;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #fff;
+  font-size: 0.216rem;
+  background-color: #424c8b;
+  border-radius: 0.3rem;
+  bottom: 0.3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
 }
 /*# sourceMappingURL=style.css.map */

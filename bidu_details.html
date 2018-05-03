@@ -16,10 +16,19 @@
 
 	<body>
 		<div class="wrapper" id="app">
+			<div class="top_ad" v-if="isShowAd">
+				<a href="http://sj.qq.com/myapp/detail.htm?apkName=com.jtlctv.yyl"><img src="img/top_ad.jpg"/></a>
+				<div class="ad_close" @click="hideAd"></div>
+			</div>
+			<a href="http://sj.qq.com/myapp/detail.htm?apkName=com.jtlctv.yyl" class="fixed_ad">app内打开</a>
 			<div class="main">
 				<h1 class="top_title" v-text="NewsTitle"></h1>
 				<div class="top_other" v-clock>{{GzUserName}} {{Crtime}}</div>
 				<div class="content">
+					<div class="video" @click="play">
+						<div class="play_btn" v-if="isplayBtn"></div>
+						<video :poster="'http://backlogin.tvlicai.com/manage/program/VideoPic/'+GzUserPic" :src='NewsVedioUrl' id="video" preload="load"></video>
+					</div>
 					<p v-text="NewsTextContent"></p>
 				</div>
 				<div class="footer">
@@ -45,6 +54,12 @@
 					GzUserName: "",
 					Crtime: "",
 					NewsTextContent: "",
+					NewsVedioUrl: "",
+					VideoScreen: "",
+					GzUserPic: "",
+					NewsPic: "",
+					isplayBtn: true,
+					isShowAd: true
 				},
 				mounted: function(){
 					var self = this;
@@ -55,16 +70,30 @@
 							url: "http://backlogin.tvlicai.com/guzhang/LcNewsDetail/"+id+"?jsoncallback=?",
 							dataType: "jsonp",
 							success: function(data) {
+								console.log(data)
 								self.Crtime = data.Crtime;
 								self.GzUserName = data.GzUserName;
 								self.NewsTitle = data.NewsTitle;
+								self.NewsVedioUrl = data.NewsVedioUrl;
+								self.GzUserPic = data.GzUserPic;
+								self.VideoScreen = data.VideoScreen;
 								self.NewsTextContent = data.NewsTextContent;
+								self.NewsPic = data.NewsPic;
 								document.title = self.NewsTitle;
 							}
 						});
 					})
 				},
 				methods: {
+					play: function(){
+						var video = document.getElementById("video");
+						video.play();
+						video.setAttribute("controls",true);
+						this.isplayBtn = false
+					},
+					hideAd: function(){
+						this.isShowAd = false
+					}
 				}
 			});
 		</script>
