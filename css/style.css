@@ -311,7 +311,7 @@ body {
   margin: 0.45rem 0 0.9rem;
 }
 .footer {
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.7rem;
 }
 .news_wrap {
   padding-top: 0;
@@ -372,17 +372,17 @@ body {
 .news_wrap .news_list ul li dl dd a {
   line-height: 0.42rem;
 }
-.top_ad {
+.top_ban {
   width: 100%;
-  height: 1.06rem;
+  height: 1.5rem;
   margin-bottom: 0.1rem;
   position: relative;
   overflow: hidden;
 }
-.top_ad a {
+.top_ban a {
   display: block;
 }
-.top_ad .ad_close {
+.top_ban .ad_close {
   width: 0.2rem;
   height: 0.2rem;
   position: absolute;
@@ -390,8 +390,8 @@ body {
   top: 0.08rem;
 }
 .fixed_ad {
-  width: 1.68rem;
-  height: 0.6rem;
+  width: 2.05rem;
+  height: 0.7rem;
   position: fixed;
   display: -webkit-box;
   display: -webkit-flex;
@@ -406,12 +406,11 @@ body {
   -ms-flex-align: center;
   align-items: center;
   color: #fff;
-  font-size: 0.216rem;
+  font-size: 0.27rem;
   background-color: #424c8b;
-  border-radius: 0.3rem;
+  border-radius: 0.35rem;
   bottom: 0.3rem;
   left: 50%;
   transform: translateX(-50%);
   -webkit-transform: translateX(-50%);
 }
-/*# sourceMappingURL=style.css.map */

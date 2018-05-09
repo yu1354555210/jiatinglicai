@@ -11,11 +11,11 @@
 
 	<body>
 		<div class="wrapper" id="app">
-			<div class="top_ad" v-if="isShowAd">
-				<a href="http://sj.qq.com/myapp/detail.htm?apkName=com.jtlctv.yyl"><img src="img/top_ad.jpg"/></a>
+			<div class="top_ban" v-if="isShowAd">
+				<a href="http://sj.qq.com/myapp/detail.htm?apkName=com.jtlctv.yyl"><img src="img/top_adv.jpg"/></a>
 				<div class="ad_close" @click="hideAd"></div>
 			</div>
-			<a href="http://sj.qq.com/myapp/detail.htm?apkName=com.jtlctv.yyl" class="fixed_ad">app内打开</a>
+			<a href="http://sj.qq.com/myapp/detail.htm?apkName=com.jtlctv.yyl" class="fixed_ad">APP内打开</a>
 			<div class="main">
 				<h1 class="top_title" v-text="ViewPointTitle"></h1>
 				<div class="top_other" v-text="Crtime"></div>
