@@ -32,6 +32,13 @@
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
+			function getQueryString(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				var r = window.location.search.substr(1).match(reg);
+				if(r != null) return unescape(r[2]);
+				return null;
+			}
+			
 			var app = new Vue({
 				el: '#app',
 				data: {
@@ -39,10 +46,11 @@
 				},
 				mounted: function(){
 					var self = this;
+					var teacherid = getQueryString("teacherid");
 					this.$nextTick(function(){
 						$.ajax({
 							type: "GET",
-							url: "http://backlogin.tvlicai.com/guzhang/LcSharePageNewsH5/93/10/1?jsoncallback=?",
+							url: "http://backlogin.tvlicai.com/guzhang/LcSharePageNewsH5/"+teacherid+"/10/1?jsoncallback=?",
 							dataType: "jsonp",
 							success: function(data) {
 								console.log(data)
