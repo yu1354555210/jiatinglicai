@@ -53,8 +53,8 @@
 							url: "http://backlogin.tvlicai.com/guzhang/LcSharePageNewsH5/"+teacherid+"/10/1?jsoncallback=?",
 							dataType: "jsonp",
 							success: function(data) {
-								console.log(data)
 								self.newsList = data;
+								document.title = data[0].TeacherName;
 							}
 						});
 					})
