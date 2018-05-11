@@ -15,7 +15,7 @@
 				<ul>
 					<li v-for="item in newsList" @click="toNewsDetail(item.DateId,item.ProgramId)">
 						<dl>
-							<dt>
+							<dt class="kd_head_img">
 								<a href="javascript:;"><img :src="'http://backlogin.tvlicai.com/manage/program/VideoPic/'+item.BgPic"/></a>
 							</dt>
 							<dd>
@@ -43,13 +43,14 @@
 				data: {
 					newsList: [],
 				},
-				mounted: function(){
+				mounted: function() {
 					var self = this;
 					var teacherid = getQueryString("teacherid");
-					this.$nextTick(function(){
+					var programid = getQueryString("programid");
+					this.$nextTick(function() {
 						$.ajax({
 							type: "GET",
-							url: "http://backlogin.tvlicai.com/guzhang/LcSharePageViewPiontH5/1014/"+teacherid+"/10/1?jsoncallback=?",
+							url: "http://backlogin.tvlicai.com/guzhang/LcSharePageViewPiontH5/" + programid + "/" + teacherid + "/10/1?jsoncallback=?",
 							dataType: "jsonp",
 							success: function(data) {
 								self.newsList = data;
@@ -59,8 +60,8 @@
 					})
 				},
 				methods: {
-					toNewsDetail:function(id,programId){
-						window.location.href = "kandian_erjiye.html?DateId="+id+"&ProgramId="+programId;
+					toNewsDetail: function(id, programId) {
+						window.location.href = "kandian_erjiye.html?DateId=" + id + "&ProgramId=" + programId;
 					}
 				}
 			});

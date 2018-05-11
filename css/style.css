@@ -296,6 +296,7 @@ body {
   margin: 0.22rem 0;
 }
 .main .content p {
+  text-align: justify;
   font-size: 0.36rem;
   color: #525252;
   line-height: 0.55rem;
@@ -332,6 +333,7 @@ body {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  align-items: center;
 }
 .news_wrap .news_list ul li dl dt {
   width: 1.45rem;
@@ -342,6 +344,10 @@ body {
 }
 .news_wrap .news_list ul li dl dt img {
   height: 100%;
+}
+.news_wrap .news_list ul li dl dt.kd_head_img {
+  width: 2.16rem;
+  height: 1.32rem;
 }
 .news_wrap .news_list ul li dl dd {
   -webkit-box-flex: 1;
