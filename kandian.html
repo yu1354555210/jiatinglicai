@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>家庭理财</title>
+		<title></title>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<script src="js/fontrem.js" type="text/javascript" charset="utf-8"></script>
 	</head>
@@ -50,11 +50,11 @@
 					this.$nextTick(function() {
 						$.ajax({
 							type: "GET",
-							url: "http://backlogin.tvlicai.com/guzhang/LcSharePageViewPiontH5/" + programid + "/" + teacherid + "/10/1?jsoncallback=?",
+							url: "http://backlogin.tvlicai.com/guzhang/LcSharePageViewPiontH5/" + programid + "/10/1?jsoncallback=?",
 							dataType: "jsonp",
 							success: function(data) {
 								self.newsList = data;
-								document.title = data[0].TeacherName;
+								document.title = data[0].ProgramName;
 							}
 						});
 					})
